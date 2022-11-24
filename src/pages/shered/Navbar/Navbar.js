@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
-
+import logo from '../../../assets/logo.png'
 const Navbar = () => {
     const {user, logOut} = useContext(AuthContext)
     const handleLogOut = () => {
@@ -14,18 +14,18 @@ const Navbar = () => {
         <li><Link to='/about'>About</Link></li>
         <li><Link to='/appoinment'>Appoinment</Link></li>
         <li><Link to='/reviews'>Reviews</Link></li>
-        <li><Link to='/contactUs'>Contact Us</Link></li>
+        <li className='pr-0'><Link to='/contactUs'>Contact Us</Link></li>
         {user?.uid ? <>
             <li><Link to='/dashboard'>Dashboard</Link></li>
             <li><button onClick={handleLogOut}>Sign Out</button></li>
         </>
         :
-        <li><Link to='/login'>Login</Link></li>
+        <li className='pr-0'><Link to='/login'>Login</Link></li>
         }
     </>
     return (
         <div>
-            <div className="navbar bg-base-100 justify-between">
+            <div className="navbar py-5 px-0 justify-between">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -35,7 +35,7 @@ const Navbar = () => {
                             {menuItems}
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost normal-case text-xl">Doctors Portal</Link>
+                    <Link to='/' className="flex items-center text-2xl  font-bold"><img className=' w-20 mr-2' src={logo} alt="" srcset="" /><span>Old Books Here</span></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
