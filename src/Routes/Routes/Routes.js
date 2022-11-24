@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import Main from "../../../../../doctors-portal-client/src/Layout/Main";
+import Main from "../../Layout/Main";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 const router = createBrowserRouter([
     {
