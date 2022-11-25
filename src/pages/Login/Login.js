@@ -5,6 +5,7 @@ import '../Page.css';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
+import axios from 'axios';
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const {signIn} = useContext(AuthContext)
@@ -24,15 +25,27 @@ const Login = () => {
         signIn(data.email, data.password)
         .then(result => {
             const user = result.user;
-            toast.error(`Log in successfully!`)
+            toast.success(`Log in successfully!`)
             console.log(user);
+            saveUser(user?.displayName, data?.email, data?.emailVerified, data?.photoUrl)
             e.target.reset();
         })
         .catch(err => {
             toast.error(`${err.message}`)
         });
     }
-
+    const saveUser = (name, email, isVerified, photoUrl) => {
+        const user = {
+            name,
+            email,
+            isVerified,
+            photoUrl,
+            role: "buyer"
+        }
+        axios.post(`http://localhost:5000/users`, user)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }
     return (
         <div className='py-20'>
             <div className="w-full max-w-md mx-auto p-4 rounded-md shadow sm:p-8 bg-yellow-600  text-white">

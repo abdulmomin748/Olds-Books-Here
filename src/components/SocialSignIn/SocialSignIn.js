@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
-
+import axios from "axios";
 const SocialSignIn = () => {
     const {signInWithGmailPopup} = useContext(AuthContext);
     const navigate = useNavigate();
@@ -13,11 +13,26 @@ const SocialSignIn = () => {
         .then(result => {
             const user = result.user;
             console.log(user);
-            toast.success('Login Successfully')
+            toast.success('Login Successfully');
+            saveUser(user.displayName, user.email, user.emailVerified, user.photoURL)
             navigate(from, {replace: true});
         })
         .catch(err => console.error(err))
     }
+
+    const saveUser = (name, email, isVerified, photoURL) => {
+        const user = {
+            name,
+            email,
+            isVerified,
+            photoURL,
+            role: "buyer"
+        }
+        axios.post('http://localhost:5000/users', user)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }   
+
     return (
         <div>
             <button onClick={handleSocialSignIN} aria-label="Login with Google" type="button" className="flex ggle_btn items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-violet-400">

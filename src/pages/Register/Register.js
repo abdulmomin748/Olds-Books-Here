@@ -20,7 +20,7 @@ const Register = () => {
             toast.success('User Create Successfully!')
             updateProfileName(data.name)
                 .then(() => {
-                    saveUser(data?.email, data?.name, data?.optionValue, data?.password, data?.photoUrl)
+                    saveUser(data?.email, data?.name, data?.optionValue, data?.password, data?.photoUrl, data?.emailVerified)
                 })
                 .catch(err => {console.log(err)})
             e.target.reset();
@@ -30,15 +30,17 @@ const Register = () => {
             toast.error(`${err.message}`)
         })
     }
-    const saveUser = (email, name, optionValue, password, photoUrl) => {
+    const saveUser = (email, name, optionValue, password, photoUrl, isVerified) => {
         const user = {
             email,
             name, 
-            optionValue,
-            password,
-            photoUrl
+            role: optionValue,
+            photoUrl,
+            isVerified: false
         }
-        axios.post(`http://localhost:5000/users`)
+        axios.post(`http://localhost:5000/users`, user)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
     }
     return (
         <div className='py-20'>
@@ -76,8 +78,8 @@ const Register = () => {
                         <div className="space-y-2">
                             <label for="email" className="block text-lg">Account Type</label>
                             <select name='optionValue' id='optionValue' className="select text-black select-bordered w-full text-xl" {...register("optionValue", { required: 'optionValue field is required' })}>
-                                <option valu='buyer'>Buyer</option>
-                                <option valu='seller'>Seller</option>
+                                <option value='buyer'>Buyer</option>
+                                <option value='seller'>Seller</option>
                             </select>
                         </div>
                         
