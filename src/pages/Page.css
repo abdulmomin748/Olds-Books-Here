@@ -1,0 +1,9 @@
+.custom-scale:hover img{
+    transform: scale(.9);
+}
+.custom-scale img, figure img{
+    transition: .5s;
+}
+.custom_card:hover figure img{
+    transform: scale(1.05);
+}
