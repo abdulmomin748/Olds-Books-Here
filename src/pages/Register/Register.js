@@ -1,9 +1,45 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SocialSignIn from '../../components/SocialSignIn/SocialSignIn';
-import '../Page.css'
+import '../Page.css';
+import { useForm } from "react-hook-form";
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import toast from 'react-hot-toast';
+import axios from "axios";
 const Register = () => {
-    
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const {createUser, updateProfileName} = useContext(AuthContext);
+    // const [user, saveUser] = useState('')
+
+    const handleSignUp = (data, e) => {
+        console.log(data);
+        createUser(data.email, data.password)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
+            toast.success('User Create Successfully!')
+            updateProfileName(data.name)
+                .then(() => {
+                    saveUser(data?.email, data?.name, data?.optionValue, data?.password, data?.photoUrl)
+                })
+                .catch(err => {console.log(err)})
+            e.target.reset();
+        })
+        .catch(err => {
+            console.error(err);
+            toast.error(`${err.message}`)
+        })
+    }
+    const saveUser = (email, name, optionValue, password, photoUrl) => {
+        const user = {
+            email,
+            name, 
+            optionValue,
+            password,
+            photoUrl
+        }
+        axios.post(`http://localhost:5000/users`)
+    }
     return (
         <div className='py-20'>
             <div className="w-full max-w-[500px] mx-auto p-4 rounded-md shadow sm:p-8 bg-yellow-600  text-white">
@@ -19,33 +55,34 @@ const Register = () => {
                     <p className="px-3 ">OR</p>
                     <hr className="w-full"/>
                 </div>
-                <form novalidate="" action="" className="space-y-8 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={handleSubmit(handleSignUp)} className="space-y-8 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <label for="name" className="block text-lg">Name</label>
-                            <input type="text" name="name" id="name" placeholder="Name" className="w-full px-3 py-2 border rounded-md" />
+                            <input {...register("name", { required: 'name field is required' })} type="text" name="name" id="name" placeholder="Name" className="w-full text-black  px-3 py-2 border rounded-md" />
                         </div>
                         <div className="space-y-2">
-                            <div className="flex justify-between">
-                                <label for="password" className="text-lg">Email</label>
-                                <Link rel="noopener noreferrer" href="#" className="text-xs hover:underline ">Forgot password?</Link>
-                            </div>
-                            <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md" />
+                            <label for="name" className="block text-lg">Email</label>
+                            <input {...register("email", { required: 'email field is required' })} type="email" name="email" id="email" placeholder="Email" className="text-black w-full px-3 py-2 border rounded-md" />
                         </div>
                         <div className="space-y-2">
-                            <label for="name" className="block text-lg">Photo Url</label>
-                            <input type="text" name="name" id="name" placeholder="Phot url" className="w-full px-3 py-2 border rounded-md" />
+                            <label for="name" className="block text-lg">Password</label>
+                            <input {...register("password", { required: 'password field is required' })} type="password" name="password" id="password" placeholder="*****" className="text-black w-full px-3 py-2 border rounded-md" />
+                        </div>
+                        <div className="space-y-2">
+                            <label  className="block text-lg">Photo Url</label>
+                            <input {...register("photoUrl", { required: 'PhotoUrl field is required' })} type="text" name="photoUrl" id="photoUrl" placeholder="Photo url" className="text-black w-full px-3 py-2 border rounded-md" />
                         </div>
                         <div className="space-y-2">
                             <label for="email" className="block text-lg">Account Type</label>
-                            <select className="select text-black select-bordered w-full text-xl" required>
-                                <option value='user'>User</option>
-                                <option value='seller'>Seller</option>
+                            <select name='optionValue' id='optionValue' className="select text-black select-bordered w-full text-xl" {...register("optionValue", { required: 'optionValue field is required' })}>
+                                <option valu='buyer'>Buyer</option>
+                                <option valu='seller'>Seller</option>
                             </select>
                         </div>
                         
                     </div>
-                    <button type="button" className="w-full bg-[#3f3c3c] hover:bg-slate-900 px-8 py-3 font-semibold rounded-md">Sign in</button>
+                    <button type="submit" className="w-full bg-[#3f3c3c] hover:bg-slate-900 px-8 py-3 font-semibold rounded-md">Sign in</button>
                 </form>
             </div>
         </div>
