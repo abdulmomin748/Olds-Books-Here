@@ -27,7 +27,7 @@ const BookingModal = ({product, setSaveProduct}) => {
         }
         console.log(bookingData);
         if(user){
-            fetch('localhost:5000/bookings', {
+            fetch('http://localhost:5000/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -62,7 +62,7 @@ const BookingModal = ({product, setSaveProduct}) => {
                         <input type="text" name='productPrice' disabled defaultValue={product.rPrice + ' Taka'} className="input input-bordered w-full placeholder:!text-black !bg-slate-200 !border-[#dcdcdc]" required/>
 
                         
-                        <input type="Email" name='name' placeholder='Name' disabled defaultValue={user?.email} className="input input-bordered w-full placeholder:!text-black !bg-slate-200 !border-[#dcdcdc]" required/>
+                        <input type="Email" name='name' placeholder='Name' disabled defaultValue={user?.displayName} className="input input-bordered w-full placeholder:!text-black !bg-slate-200 !border-[#dcdcdc]" required/>
                         <input type="Email" name='email' placeholder='Email' disabled defaultValue={user?.email} className="input input-bordered w-full placeholder:!text-black !bg-slate-200 !border-[#dcdcdc]" required/>
 
                         <input type='text' name='phone' placeholder='Phone Number' className="input input-bordered w-full placeholder:!text-black" required/>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Loading from '../shered/Loading/Loading';
-import { useNavigation } from "react-router-dom";
 import '../Page.css';
 
 // import BookingModal from '../shered/BookingModal/BookingModal';
@@ -21,7 +20,7 @@ const Products = () => {
     if(loading){
         return  <Loading />
     }
-    console.log(saveProduct);
+    // console.log(saveProduct);
     return (
         <div>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 py-24 pt-20'>
