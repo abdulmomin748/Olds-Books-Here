@@ -7,3 +7,9 @@
 .custom_card:hover figure img{
     transform: scale(1.05);
 }
+
+.ggle_btn:hover {
+    background: #3f3c3c;
+    color: #fff;
+    border: 1px solid #3f3c3c;
+}

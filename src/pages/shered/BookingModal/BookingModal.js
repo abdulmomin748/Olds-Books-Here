@@ -55,7 +55,7 @@ const BookingModal = ({product, setSaveProduct}) => {
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box bg-gray-100 relative">
-                    <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-6 top-5">✕</label>
                     <h3 className="text-lg font-bold mb-10">{`Product: ${product.name}`}</h3>
                     <form onSubmit={handleSubmit} className='grid grid-cols-1 gap-5'>
                         <input type="text" name='productName' defaultValue={product.name} className="input input-bordered w-full placeholder:!text-black !bg-slate-200 !border-[#dcdcdc]" disabled required/>
