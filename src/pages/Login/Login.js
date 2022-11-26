@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialSignIn from '../../components/SocialSignIn/SocialSignIn';
 import '../Page.css';
 import { useForm } from "react-hook-form";
@@ -8,17 +8,10 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const {signIn} = useContext(AuthContext)
-
-
-    // if(errors){
-    //     if(errors?.email){
-    //         toast.error(`${errors.email?.message}`)
-    //     }
-    //     else{
-    //         toast.error(`${errors.password?.message}`)
-    //     }
-    // }
+    const {signIn, logOut} = useContext(AuthContext)
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || '/';
+    const navigate = useNavigate();
     const handleLogin = (data, e) => {
         console.log(data, errors);
         
@@ -27,7 +20,9 @@ const Login = () => {
             const user = result.user;
             toast.success(`Log in successfully!`)
             console.log(user);
-            saveUser(user?.displayName, data?.email, data?.emailVerified, data?.photoUrl)
+            saveUser(user?.displayName, data?.email, data?.emailVerified, data?.photoUrl);
+            navigate(from, {replace: true});
+            logOut().then().catch(err => console.error(err))
             e.target.reset();
         })
         .catch(err => {

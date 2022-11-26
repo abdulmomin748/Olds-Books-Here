@@ -9,6 +9,8 @@ import Login from "../../pages/Login/Login";
 import Products from "../../pages/Products/Products";
 import Register from "../../pages/Register/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import BuyerRoute from "../SellerRoute/BuyerRoute";
+import SellerRoute from "../SellerRoute/BuyerRoute";
 const router = createBrowserRouter([
     {
         path: '/',
@@ -44,8 +46,12 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
-                path: '/dashboard/myorders',
-                element: <MyOders />
+                path: '/dashboard',
+                element: <BuyerRoute><MyOders /></BuyerRoute>
+            },
+            {
+                path: '/dashboard/myorders/',
+                element: <BuyerRoute><MyOders /></BuyerRoute>
             }
         ]
     }

@@ -4,7 +4,7 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const BookingModal = ({product, setSaveProduct}) => {
     const {user} = useContext(AuthContext)
-
+    console.log(product)
     const handleSubmit = event => {
 
         event.preventDefault();
@@ -15,7 +15,6 @@ const BookingModal = ({product, setSaveProduct}) => {
         const email = form.email.value;
         const phone = form.phone.value;
         const location = form.meetingLocation.value;
-        
         console.log(productName, productPrice, name, email, phone, location);
         const bookingData = {
             productName,
@@ -23,7 +22,8 @@ const BookingModal = ({product, setSaveProduct}) => {
             name,
             email,
             phone,
-            location
+            location,
+            image: product.image,
         }
         console.log(bookingData);
         if(user){

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthProvider/AuthProvider';
+import useBuyer from '../hook/useBuyer';
 import Footer from '../pages/shered/Footer/Footer';
 import Navbar from '../pages/shered/Navbar/Navbar';
-
 const DashboardLayou = () => {
+    const {user} = useContext(AuthContext);
+    const [isBuyer] = useBuyer(user?.email);
+    console.log(isBuyer);
     return (
         <div>
             <Navbar />
@@ -15,7 +19,10 @@ const DashboardLayou = () => {
                 <div className="drawer-side bg-slate-100"> {/*left part*/}
                     <label className="drawer-overlay"></label> 
                     <ul className=" p-4 w-80 text-base-content">
-                        <li className=''><Link to='/dashboard/myorders' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>My orders</Link></li>
+                        {   isBuyer &&
+                            <li className=''><Link to='/dashboard/myorders' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>My orders</Link></li>
+                        }
+                        <li className=''><Link to='/dashboard/myorders' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>My Prduct</Link></li>
                     </ul>
                 </div>
             </div>
