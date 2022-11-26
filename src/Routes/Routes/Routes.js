@@ -2,14 +2,15 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayou from "../../Layout/DashboardLayou";
 import Main from "../../Layout/Main";
 import Blog from "../../pages/Blog/Blog";
+import AddProduct from "../../pages/Dashboard/AddProduct/AddProduct";
 import MyOders from "../../pages/Dashboard/MyOders/MyOders";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import Home from "../../pages/Home/Home/Home";
 import Login from "../../pages/Login/Login";
 import Products from "../../pages/Products/Products";
 import Register from "../../pages/Register/Register";
+import BuyerRoute from "../BuyerRoute/SellerRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import BuyerRoute from "../SellerRoute/BuyerRoute";
 import SellerRoute from "../SellerRoute/BuyerRoute";
 const router = createBrowserRouter([
     {
@@ -46,12 +47,16 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
-                path: '/dashboard',
+                path: '/dashboard/myorders/',
                 element: <BuyerRoute><MyOders /></BuyerRoute>
             },
             {
-                path: '/dashboard/myorders/',
-                element: <BuyerRoute><MyOders /></BuyerRoute>
+                path: '/dashboard/addproduct/',
+                element: <SellerRoute><AddProduct /></SellerRoute>
+            },
+            {
+                path: '/dashboard/myproduct/',
+                element: <SellerRoute><AddProduct /></SellerRoute>
             }
         ]
     }

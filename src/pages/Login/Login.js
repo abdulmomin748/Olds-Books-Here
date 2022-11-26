@@ -22,7 +22,7 @@ const Login = () => {
             console.log(user);
             saveUser(user?.displayName, data?.email, data?.emailVerified, data?.photoUrl);
             navigate(from, {replace: true});
-            logOut().then().catch(err => console.error(err))
+            // logOut().then().catch(err => console.error(err))
             e.target.reset();
         })
         .catch(err => {

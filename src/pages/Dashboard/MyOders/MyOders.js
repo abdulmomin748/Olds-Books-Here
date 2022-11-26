@@ -18,7 +18,7 @@ const MyOders = () => {
     if(isLoading){
         return <Loading />
     }
-    // console.log(orders)
+    console.log(orders)
     return (
         <>
             <div class="overflow-x-auto relative">
