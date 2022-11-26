@@ -25,7 +25,10 @@ const DashboardLayou = () => {
                             <li className=''><Link to='/dashboard/myorders' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>My orders</Link></li>
                         }
                         {    isSeller &&
-                             <li className=''><Link to='/dashboard/addproduct' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>Add product</Link></li>
+                             <>
+                                <li className=''><Link to='/dashboard/addproduct' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>Add product</Link></li>
+                                <li className=''><Link to='/dashboard/myproducts' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>My products</Link></li>
+                             </>
                         }
                     </ul>
                 </div>

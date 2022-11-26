@@ -61,7 +61,6 @@ const Login = () => {
                         <div className="space-y-2">
                             <label for="email" className="block text-lg">Email address</label>
                             <input {...register("email", { required: 'Email Address is required' })}  type="email" name="email" id="email" placeholder="Email" className="text-black w-full px-3 py-2 border rounded-md" />
-                            
                         </div>
                         <div className="space-y-2">
                             <div className="flex justify-between">

@@ -4,6 +4,7 @@ import Main from "../../Layout/Main";
 import Blog from "../../pages/Blog/Blog";
 import AddProduct from "../../pages/Dashboard/AddProduct/AddProduct";
 import MyOders from "../../pages/Dashboard/MyOders/MyOders";
+import MyProducts from "../../pages/Dashboard/MyProduct/MyProducts";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import Home from "../../pages/Home/Home/Home";
 import Login from "../../pages/Login/Login";
@@ -55,8 +56,8 @@ const router = createBrowserRouter([
                 element: <SellerRoute><AddProduct /></SellerRoute>
             },
             {
-                path: '/dashboard/myproduct/',
-                element: <SellerRoute><AddProduct /></SellerRoute>
+                path: '/dashboard/myproducts/',
+                element: <SellerRoute>< MyProducts/></SellerRoute>
             }
         ]
     }
