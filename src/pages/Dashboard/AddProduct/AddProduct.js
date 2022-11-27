@@ -11,6 +11,7 @@ const AddProduct = () => {
     const [categories, setCategories] = useState('')
     const [loading, setLoading] = useState(true);
     const { user } = useContext(AuthContext);
+    const imageHostKey = process.env.REACT_APP_imgbb_apiKey;
     const [addproduct, setAddProduct] = useState('')
 
     useEffect(() => {   
@@ -21,13 +22,17 @@ const AddProduct = () => {
             setLoading(false)
         })
     },[]);
-
+    
+    console.log(imageHostKey);
     const handleAddProduct = e => {
+        if(!e.target.image){
+            toast.error('dd')
+        }
         e.preventDefault();
         const form = e.target;
         const seller = user?.displayName;
         const pName = form.pName.value;
-        const pPhotoUrl = form.pPhotoUrl?.value;
+        const pImage = form.image.files[0];
         const pCategory = form.pCategory.value;
         const pPrice = form.pPrice.value;
         const pFeedback = form.pFeedback.value;
@@ -37,30 +42,44 @@ const AddProduct = () => {
         const pYearsofUse = form.pYearsofUse.value;
         const pPurchaseDate = form.pPurchaseDate.value;
         const pPostDate = form.pPostDate.value;
-
-        const addProductInfo = {
-            seller,
-            pName,
-            pPhotoUrl,
-            pCategory,
-            pPrice,
-            pFeedback,
-            uNumber,
-            uLocation,
-            pDesc,
-            pYearsofUse,
-            pPurchaseDate,
-            pPostDate,
-        }
-        axios.post('http://localhost:5000/products', addProductInfo)
-        .then(res => {
-           if(res.data.acknowledged){
-                form.reset();
-                toast.success(`${pName} product added`);
-                
-           }
-        })
         
+        
+        // console.log(addProductInfo);
+
+        const formData = new FormData();
+        formData.append('image', pImage);
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+        axios.post(url, formData)
+        .then(res => {
+            console.log(res.data.data);
+            if(res.data.success){
+                const addProductInfo = {
+                    seller,
+                    pName,
+                    pImage: res.data.data.url,
+                    pCategory,
+                    pPrice,
+                    pFeedback,
+                    uNumber,
+                    uLocation,
+                    pDesc,
+                    pYearsofUse,
+                    pPurchaseDate,
+                    pPostDate,
+                }
+                console.log(pImage);
+                axios.post('http://localhost:5000/products', addProductInfo)
+                .then(res => {
+                   if(res.data.acknowledged){
+                        form.reset();
+                        toast.success(`${pName} product added`);
+                   }
+                })
+            }
+        })
+        .catch(err => {
+            toast.error(`${err.message}`)
+        })
     }
     if(loading){
         return <Loading />
@@ -99,7 +118,9 @@ const AddProduct = () => {
                                         <p class="pt-1 text-sm tracking-wider ">
                                             Attach Product Image</p>
                                     </div>
-                                    <input type="file" class="" />
+                                    <input required {...register("name", {
+                                    required: "Name is required",
+                                    })} name='image'  type="file" class="" />
                                 </label>
                             </div>    
                         </div>
