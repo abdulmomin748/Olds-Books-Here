@@ -10,9 +10,12 @@ import Home from "../../pages/Home/Home/Home";
 import Login from "../../pages/Login/Login";
 import Products from "../../pages/Products/Products";
 import Register from "../../pages/Register/Register";
-import BuyerRoute from "../BuyerRoute/SellerRoute";
+import BuyerRoute from "../BuyerRoute/BuyerRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import SellerRoute from "../SellerRoute/BuyerRoute";
+import Payment from "../../pages/Dashboard/Payment/Payment";
+import AllSeller from "../../pages/Dashboard/AllSellers/AllSellers";
+import AllBuyer from "../../pages/Dashboard/AllBuyers/AllBuyers";
 const router = createBrowserRouter([
     {
         path: '/',
@@ -48,6 +51,14 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
+                path: '/dashboard/allSellers',
+                element: <AllSeller />
+            },
+            {
+                path: '/dashboard/allBuyers',
+                element: <AllBuyer />
+            },
+            {
                 path: '/dashboard/myorders/',
                 element: <BuyerRoute><MyOders /></BuyerRoute>
             },
@@ -58,6 +69,11 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/myproducts/',
                 element: <SellerRoute>< MyProducts/></SellerRoute>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`),
+                element: <Payment/>
             }
         ]
     }

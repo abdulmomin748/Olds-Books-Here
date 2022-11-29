@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import Loading from '../../shered/Loading/Loading';
 
@@ -10,7 +11,7 @@ const MyOders = () => {
     const {data: orders = [], isLoading} = useQuery({
         queryKey: ['orders', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/products?email=${user?.email}`);
+            const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`);
             const data = await res.json();
             return data;
         }
@@ -52,7 +53,21 @@ const MyOders = () => {
                                     {order.productPrice}
                                 </td>
                                 <td class="py-4 px-6">
-                                    <button className='btn-sm text-[15px] bg-yellow-500 text-white rounded-md'>Pay</button>
+                                    {
+                                        order.productPrice && !order.paid && <>
+                                            <Link to={`/dashboard/payment/${order._id}`}>
+                                                <button className='btn-sm font-semibold text-[15px] bg-yellow-500 text-white rounded-md'>
+                                                    Pay
+                                                </button>
+                                            </Link>
+                                        </>
+                                    }
+                                    {
+                                        order.productPrice && order.paid && <>
+                                            <p className='font-semibold border-b'>Paid</p>
+                                        </>
+                                        
+                                    }
                                 </td>
                             </tr>)
                         }

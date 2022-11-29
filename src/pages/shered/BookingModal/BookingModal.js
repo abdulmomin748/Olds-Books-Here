@@ -1,10 +1,19 @@
+import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const BookingModal = ({product, setSaveProduct}) => {
-    const {user} = useContext(AuthContext)
-    console.log(product)
+    const {user} = useContext(AuthContext);
+    const [isBuyer, setIsBuyer] = useState('')
+    console.log(product);
+    axios.get(`http://localhost:5000/users?email=${user?.email}`)
+    .then(res => {
+        console.log(res.data.role);
+        const buyer = res.data.role;
+        setIsBuyer(buyer);
+    })
+
     const handleSubmit = event => {
 
         event.preventDefault();
@@ -26,7 +35,8 @@ const BookingModal = ({product, setSaveProduct}) => {
             image: product.image,
         }
         console.log(bookingData);
-        if(user){
+
+        if(isBuyer){
             fetch('http://localhost:5000/bookings', {
             method: 'POST',
             headers: {
@@ -45,10 +55,10 @@ const BookingModal = ({product, setSaveProduct}) => {
                     toast.error(data.message)
                 }
             })
-        }
-        else{
-            toast.error('Please Log in first!')
-        }
+            }
+            else{
+                toast.error('Only user can buy product!')
+            }
     }
     return (
         <div>
@@ -59,7 +69,7 @@ const BookingModal = ({product, setSaveProduct}) => {
                     <h3 className="text-lg font-bold mb-10">{`Product: ${product.name}`}</h3>
                     <form onSubmit={handleSubmit} className='grid grid-cols-1 gap-5'>
                         <input type="text" name='productName' defaultValue={product.name} className="input input-bordered w-full placeholder:!text-black !bg-slate-200 !border-[#dcdcdc]" disabled required/>
-                        <input type="text" name='productPrice' disabled defaultValue={product.rPrice + ' Taka'} className="input input-bordered w-full placeholder:!text-black !bg-slate-200 !border-[#dcdcdc]" required/>
+                        <input type="text" name='productPrice' disabled defaultValue={product.rPrice} className="input input-bordered w-full placeholder:!text-black !bg-slate-200 !border-[#dcdcdc]" required/>
 
                         
                         <input type="Email" name='name' placeholder='Name' disabled defaultValue={user?.displayName} className="input input-bordered w-full placeholder:!text-black !bg-slate-200 !border-[#dcdcdc]" required/>

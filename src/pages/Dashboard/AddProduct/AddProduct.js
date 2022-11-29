@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import Loading from '../../shered/Loading/Loading';
 
@@ -11,9 +12,11 @@ const AddProduct = () => {
     const [categories, setCategories] = useState('')
     const [loading, setLoading] = useState(true);
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    console.log(user)
     const imageHostKey = process.env.REACT_APP_imgbb_apiKey;
     const [addproduct, setAddProduct] = useState('')
-
+    const [productId, setProductId] = useState('637f455c345d495b77927d28')
     useEffect(() => {   
         axios.get('http://localhost:5000/productsCategoris')
         .then(data => {
@@ -23,56 +26,61 @@ const AddProduct = () => {
         })
     },[]);
     
-    console.log(imageHostKey);
+
     const handleAddProduct = e => {
-        if(!e.target.image){
-            toast.error('dd')
-        }
         e.preventDefault();
         const form = e.target;
-        const seller = user?.displayName;
-        const pName = form.pName.value;
-        const pImage = form.image.files[0];
+        const categoryId = productId;
+        const sellerName = user?.displayName;
+        const name = form.pName.value;
+        const image = form.image.files[0];
         const pCategory = form.pCategory.value;
-        const pPrice = form.pPrice.value;
+        const rPrice = form.rPrice.value;
+        const oPrice = form.oPrice.value;
         const pFeedback = form.pFeedback.value;
         const uNumber = form.uNumber.value;
-        const uLocation = form.uLocation.value;
+        const location = form.uLocation.value;
         const pDesc = form.pDesc.value;
-        const pYearsofUse = form.pYearsofUse.value;
+        const yUse = form.pYearsofUse.value;
         const pPurchaseDate = form.pPurchaseDate.value;
-        const pPostDate = form.pPostDate.value;
+        const postedTime = form.pPostDate.value;
         
         
         // console.log(addProductInfo);
 
         const formData = new FormData();
-        formData.append('image', pImage);
+        formData.append('image', image);
         const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
         axios.post(url, formData)
         .then(res => {
             console.log(res.data.data);
             if(res.data.success){
                 const addProductInfo = {
-                    seller,
-                    pName,
-                    pImage: res.data.data.url,
+                    categoryId,
+                    sellerName,
+                    email: user?.email,
+                    name,
+                    image: res.data.data.url,
                     pCategory,
-                    pPrice,
+                    rPrice,
+                    oPrice,
                     pFeedback,
                     uNumber,
-                    uLocation,
+                    location,
                     pDesc,
-                    pYearsofUse,
+                    yUse,
                     pPurchaseDate,
-                    pPostDate,
+                    postedTime,
+                    verified: false,
+                    isPaid: false,
                 }
-                console.log(pImage);
+                console.log(image);
                 axios.post('http://localhost:5000/products', addProductInfo)
                 .then(res => {
                    if(res.data.acknowledged){
                         form.reset();
-                        toast.success(`${pName} product added`);
+                        toast.success(`${name} product added`);
+                        navigate('/dashboard/myproducts')
                    }
                 })
             }
@@ -103,7 +111,7 @@ const AddProduct = () => {
                 <form onSubmit={handleAddProduct} className="space-y-8 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-4">
                         <div className="space-y-2">
-                            <input type="text" name="pName" id="pName" placeholder="Product Name" className="text-black w-full px-3 py-2 border rounded-md" />
+                            <input required type="text" name="pName" id="pName" placeholder="Product Name" className="text-black w-full px-3 py-2 border rounded-md" />
                         </div>
                         <div className="space-y-2"> 
                             <div class="flex items-center justify-center w-full">
@@ -118,46 +126,49 @@ const AddProduct = () => {
                                         <p class="pt-1 text-sm tracking-wider ">
                                             Attach Product Image</p>
                                     </div>
-                                    <input required {...register("name", {
+                                    <input required  {...register("name", {
                                     required: "Name is required",
                                     })} name='image'  type="file" class="" />
                                 </label>
                             </div>    
                         </div>
                         <div className="space-y-2">
-                            <select name='pCategory' id='pCategory' className="select text-black select-bordered w-full text-xl">
+                            <select onChange={(e) => setProductId(e.target.value)} required name='pCategory' id='pCategory' className="select text-black select-bordered w-full text-xl">
                                 {
-                                   categories?.map(category => <option value={category.name}>{category.name}</option>)
+                                   categories?.map(category => <option value={category._id}>{category.name}</option>)
                                 }
                             </select>
                         </div>
                         <div className="space-y-2">
-                            <input type="text" name="pPrice" id="pPrice" placeholder="Product Price" className="w-full px-3 text-black py-2 border rounded-md" />
+                            <input required type="text" name="rPrice" id="rPrice" placeholder="Product recel price" className="w-full px-3 text-black py-2 border rounded-md" />
                         </div>
                         <div className="space-y-2">
-                            <input type="text" name="pFeedback" id="pFeedback" placeholder="Product Feedback" className="w-full px-3 text-black py-2 border rounded-md" />
+                            <input required type="text" name="oPrice" id="oPrice" placeholder="Product original price" className="w-full px-3 text-black py-2 border rounded-md" />
                         </div>
                         <div className="space-y-2">
-                            <input type="text" name="uNumber" id="uNumber" placeholder="Seller Number" className="w-full px-3 text-black py-2 border rounded-md" />
+                            <input required type="text" name="pFeedback" id="pFeedback" placeholder="Product Feedback" className="w-full px-3 text-black py-2 border rounded-md" />
                         </div>
                         <div className="space-y-2">
-                            <input type="text" name="uLocation" id="uLocation" placeholder="Seller Location" className="w-full px-3 text-black py-2 border rounded-md" />
+                            <input required type="text" name="uNumber" id="uNumber" placeholder="Seller Number" className="w-full px-3 text-black py-2 border rounded-md" />
                         </div>
                         <div className="space-y-2">
-                            <input type="text" name="pDesc" id="pDesc" placeholder="Product description" className="w-full px-3 text-black py-2 border rounded-md" />
+                            <input required type="text" name="uLocation" id="uLocation" placeholder="Seller Location" className="w-full px-3 text-black py-2 border rounded-md" />
                         </div>
                         <div className="space-y-2">
-                            <input type="text" placeholder='Years of use' name="pYearsofUse" id="pYearsofUse" className="w-full px-3 text-black py-2 border rounded-md" />
+                            <input required type="text" name="pDesc" id="pDesc" placeholder="Product description" className="w-full px-3 text-black py-2 border rounded-md" />
                         </div>
                         <div className="space-y-2">
-                            <input type="text" placeholder='Year of purchase' name="pPurchaseDate" id="pPurchaseDate" className="w-full px-3 text-black py-2 border rounded-md" />
+                            <input required type="text" placeholder='Years of use' name="pYearsofUse" id="pYearsofUse" className="w-full px-3 text-black py-2 border rounded-md" />
+                        </div>
+                        <div className="space-y-2">
+                            <input required type="text" placeholder='Year of purchase' name="pPurchaseDate" id="pPurchaseDate" className="w-full px-3 text-black py-2 border rounded-md" />
                         </div>
                         
                         <div className="space-y-2">
-                            <input type="text" name="pPostDate" id="pPostDate" defaultValue={formatDate(new Date())} disabled className="w-full px-3 text-black py-2 border rounded-md" />
+                            <input required type="text" name="pPostDate" id="pPostDate" defaultValue={formatDate(new Date())} disabled className="w-full px-3 text-black py-2 border rounded-md" />
                         </div>
                     </div>
-                     <button type="submit" className="w-full bg-[#3f3c3c] hover:bg-slate-900 px-8 py-3 font-semibold rounded-md">Sign in</button>
+                     <button type="submit" className="w-full bg-[#3f3c3c] hover:bg-slate-900 px-8 py-3 font-semibold rounded-md uppercase">Submit</button>
                 </form>
             </div>
         </div>

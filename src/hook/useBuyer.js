@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 const useBuyer = email => {
-    console.log(email);
+    console.log('under Usebyer', email)
     const [isBuyer, setIsBuyer] = useState(false);
     const [isBuyerLoading, setIsBuyerLoading] = useState(true)
     useEffect(() => {

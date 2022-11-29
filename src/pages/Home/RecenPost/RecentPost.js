@@ -5,7 +5,7 @@ import img3 from '../../../assets/images.jpg'
 const RecentPost = () => {
     return (
         <div className='py-28'>
-            <h2 className='text-5xl font-semibold text-center mb-10'>Recent Blog Posts</h2>
+            <h2 className='text-4xl font-semibold text-center mb-10'>Recent Blog Posts</h2>
             <div className='grid gap-6 lg:grid-cols-3 grid-cols-1 md:grid-cols-2'>
             <div className="max-w-lg mx-auto p-4 shadow-md dark:bg-gray-900 dark:text-gray-100">
                 <div className="space-y-4">

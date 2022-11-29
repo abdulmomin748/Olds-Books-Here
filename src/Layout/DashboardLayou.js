@@ -9,6 +9,8 @@ const DashboardLayou = () => {
     const {user} = useContext(AuthContext);
     const [isBuyer] = useBuyer(user?.email);
     const [isSeller] = useSeller(user?.email);
+    console.log('isByer', isBuyer, 'isSeller', isSeller);
+    
     return (
         <div>
             <Navbar />
@@ -20,6 +22,14 @@ const DashboardLayou = () => {
                 <div className="drawer-side bg-slate-100"> {/*left part*/}
                     <label className="drawer-overlay"></label> 
                     <ul className=" p-4 w-80 text-base-content">
+                        {  
+                            // isAdmin &&
+                            <>
+                                <li className=''><Link to='/dashboard/allSellers' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>All Sellers</Link></li>
+                                <li className=''><Link to='/dashboard/allBuyers' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>All Buyers</Link></li>
+
+                            </>
+                        }
                         {  
                             isBuyer &&
                             <li className=''><Link to='/dashboard/myorders' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>My orders</Link></li>

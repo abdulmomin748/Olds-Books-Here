@@ -11,12 +11,32 @@ const ProductItem = ({setSaveProduct, product}) => {
                     <p className='text-xl'>Resale Price: <span className='font-medium border-b-2' children>{product.rPrice}</span></p> 
                     <p className='text-xl'>Orginal Price: <span className='font-medium border-b-2' children>{product.oPrice}</span></p> 
                     <p className='text-xl'>Post Time: <span className='font-medium border-b-2' children>{product.postedTime}</span></p> 
+                    <p className='text-xl'>Use: <span className='font-medium border-b-2' children>{product.yUse}{product.yUse === 1 ? ' year' : ' years'}</span></p> 
+                    
+                    {
+                        product?.pFeedback && <p className='text-xl'>{
+                             <>
+                                Type: <span className='font-medium border-b-2' children>{product.pFeedback}</span>
+                            </>
+                        }
+                        </p> 
+                    }
+                    {
+                        product?.pDesc && <p className='text-xl'>{
+                             <>
+                                Description: <span className='font-medium border-b-2' children>{
+                                    product.pDesc.length > 75 ? product.pDesc.slice(0,75) + '...' : product.pDesc
+                                }</span>
+                            </>
+                        }
+                        </p> 
+                    }
                     <div className='flex justify-start items-center mb-3'>
                         <p className='text-xl !flex-grow-0 inline-block'>Saller: <span className='font-medium border-b-2' children>{product.sellerName}</span></p> 
                         <span className='pl-2 !flex-grow-0'><img className='w-4' src={product.verified && icon} alt="" srcset="" /></span>
                     </div>
                     <div className="card-actions justify-end">
-                        <label onClick={() => setSaveProduct(product)} htmlFor="booking-modal" className="btn w-full btn-primary border-0 bg-gray-700">Buy Now</label>
+                        <label onClick={() => setSaveProduct(product)} htmlFor="booking-modal" className="btn w-full btn-primary border-0 bg-gray-700">Book Now</label>
                     </div>
                 </div>
             </div>

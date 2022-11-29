@@ -38,8 +38,8 @@ const Register = () => {
             photoUrl,
             isVerified: false
         }
-        axios.post(`http://localhost:5000/users`, user)
-        .then(res => console.log(res))
+        axios.post(`http://localhost:5000/users?email=${user?.email}`, user)
+        .then(res => console.log(res.data.message))
         .catch(err => console.log(err))
     }
     return (

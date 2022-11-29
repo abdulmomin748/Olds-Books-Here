@@ -9,7 +9,8 @@
         "yUse": 1,
         "postedTime": "11-2-2018",
         "sellerName": "Farhan",
-        "verified": true
+        "verified": true,
+"isPaid": false
     },
     {
         "image": "https://i.ibb.co/JRb96dk/cat-Item-1-2.jpg",
@@ -21,7 +22,8 @@
         "yUse": 2,
         "postedTime": "11-3-2018",
         "sellerName": "Hasan",
-        "verified": false
+        "verified": true,
+"isPaid": false
     },
     {
         "image": "https://i.ibb.co/6y81pSL/cat-Item-1-3.jpg",
@@ -33,7 +35,8 @@
         "yUse": 1,
         "postedTime": "11-4-2018",
         "sellerName": "Robiul",
-        "verified": true
+        "verified": true,
+"isPaid": false
     },
     {
         "image": "https://i.ibb.co/BLC0fPq/cat-Item-2-1.jpg",
@@ -45,7 +48,8 @@
         "yUse": 2,
         "postedTime": "11-5-2028",
         "sellerName": "Abid",
-        "verified": false
+        "verified": true,
+"isPaid": false
     },
     {
         "image": "https://i.ibb.co/bgZND07/cat-Item-2-2.jpg",
@@ -57,7 +61,8 @@
         "yUse": 3,
         "postedTime": "11-3-2019",
         "sellerName": "Robi",
-        "verified": false
+        "verified": true,
+"isPaid": false
     },
     {
         "image": "https://i.ibb.co/Zx277Qm/cat-Item-2-3.jpg",
@@ -69,7 +74,8 @@
         "yUse": 4,
         "postedTime": "18-4-2019",
         "sellerName": "",
-        "verified": false
+        "verified": true,
+"isPaid": false
     },
 
     {
@@ -82,7 +88,8 @@
         "yUse": 2,
         "postedTime": "1-4-2020",
         "sellerName": "Lutfor",
-        "verified": true
+        "verified": true,
+"isPaid": false
     },
     {
         "image": "https://i.ibb.co/5h3kzkQ/cat-Item-3-2.jpg",
@@ -94,7 +101,8 @@
         "yUse": 4,
         "postedTime": "16-6-2021",
         "sellerName": "Rakib",
-        "verified": false
+        "verified": true,
+"isPaid": false
     },
     {
         "image": "https://i.ibb.co/1fkywKn/cat-Item-3-3.jpg",
@@ -106,7 +114,8 @@
         "yUse": 5,
         "postedTime": "16-6-2018",
         "sellerName": "Samsunnahar",
-        "verified": true
+        "verified": true,
+"isPaid": false
     },
 
     {
@@ -119,7 +128,8 @@
         "yUse": 2,
         "postedTime": "16-6-2022",
         "sellerName": "Ali Ahmed",
-        "verified": true
+        "verified": true,
+"isPaid": false
     },
     {
         "image": "https://i.ibb.co/WfN3rth/cat-Item-4-2.jpg",
@@ -131,7 +141,8 @@
         "yUse": 1,
         "postedTime": "16-5-2021",
         "sellerName": "Rashed",
-        "verified": true
+        "verified": true,
+"isPaid": false
     },
     {
         "image": "https://i.ibb.co/dgH8C1h/cat-Item-4-3.jpg",
@@ -143,7 +154,8 @@
         "yUse": 4,
         "postedTime": "16-5-2018",
         "sellerName": "Fardin",
-        "verified": false
+        "verified": true,
+"isPaid": false
     }
     
 ]
