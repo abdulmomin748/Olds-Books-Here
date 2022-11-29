@@ -1,18 +1,22 @@
 import axios from 'axios';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const BookingModal = ({product, setSaveProduct}) => {
     const {user} = useContext(AuthContext);
     const [isBuyer, setIsBuyer] = useState('')
-    console.log(product);
-    axios.get(`http://localhost:5000/users?email=${user?.email}`)
-    .then(res => {
-        console.log(res.data.role);
-        const buyer = res.data.role;
-        setIsBuyer(buyer);
-    })
+    console.log('here', product._id);
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/users?email=${user?.email}`)
+        .then(res => {
+            console.log(res.data.role);
+            const buyer = res.data.role;
+            setIsBuyer(buyer);
+        })
+    },[user?.email])
+
 
     const handleSubmit = event => {
 
@@ -33,6 +37,7 @@ const BookingModal = ({product, setSaveProduct}) => {
             phone,
             location,
             image: product.image,
+            beforeBookingProductId: product._id,
         }
         console.log(bookingData);
 

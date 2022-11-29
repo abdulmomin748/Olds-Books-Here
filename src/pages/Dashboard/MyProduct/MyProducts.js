@@ -99,13 +99,14 @@ const MyProducts = () => {
                                     </td>
                                     <td class="py-4 px-6">
                                         <span className='btn-sm text-[15px] bg-yellow-500 text-white rounded-md'>{
-                                            product.isPaid ?  'Sold' : 'Unsold'
+                                            product.isPaid ?  'Sold' : 'Available '
                                         }
                                         </span>
                                     </td>
                                     <td class="py-4 px-6">
+                                        
                                             {
-                                                product.isPaid && <button  className='btn-sm cursor-not-allowed text-[15px] bg-yellow-500 text-white rounded-md'>
+                                                (product.isPaid || product.advertised) && <button  className='btn-sm cursor-not-allowed text-[15px] bg-yellow-500 text-white rounded-md'>
                                                     Advertised
                                                 </button>
                                             }

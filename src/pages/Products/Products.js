@@ -8,8 +8,6 @@ import ProductItem from './ProductItem';
 import BookingModal from '../shered/BookingModal/BookingModal';
 
 const Products = () => {
-
-    
     const [saveProduct, setSaveProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const products = useLoaderData();
@@ -21,6 +19,7 @@ const Products = () => {
         return  <Loading />
     }
     // console.log(saveProduct);
+    
     return (
         <div>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 py-24 pt-20'>

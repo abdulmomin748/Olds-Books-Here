@@ -5,12 +5,15 @@ import toast from 'react-hot-toast';
 import Loading from '../../shered/Loading/Loading';
      
      const CheckOut = ({productBooking}) => {
-        const {productPrice, name, email,productName, _id} = productBooking;
+        const {productPrice, name, email,productName, _id, beforeBookingProductId} = productBooking;
         const stripe = useStripe();
         const elements = useElements();
         const [loading, setLoading] = useState(false);
         const [clientSecret, setClientSecret] = useState("");
-        console.log(clientSecret,productBooking)
+        // console.log(clientSecret,productBooking);
+
+        
+
         useEffect(() => {
             // Create PaymentIntent as soon as the page loads
             fetch("http://localhost:5000/create-payment-intent", {
@@ -59,12 +62,13 @@ import Loading from '../../shered/Loading/Loading';
                 return;
             }
             if(paymentIntent.status){
-                toast.success(`Payment completed product ${productName}`);
+                toast.success(`Payment completed product of ${productName}`);
                 setLoading(false);
                 const payment = {
                     productPrice,
                     email,
                     bookingId: _id,
+                    beforeBookingProductId
                 }
                 fetch('http://localhost:5000/payments', {
                     method: 'POST', 
@@ -76,7 +80,7 @@ import Loading from '../../shered/Loading/Loading';
                 .then(res => res.json())
                 .then(data => {
                    if(data.insertedId){
-                        toast.success('Payment completed')
+                        
                    }
                 })
             }

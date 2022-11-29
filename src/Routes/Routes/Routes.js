@@ -16,6 +16,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Payment from "../../pages/Dashboard/Payment/Payment";
 import AllSeller from "../../pages/Dashboard/AllSellers/AllSellers";
 import AllBuyer from "../../pages/Dashboard/AllBuyers/AllBuyers";
+import AdminRoute from "../AdminRoute/AdminRoute";
 const router = createBrowserRouter([
     {
         path: '/',
@@ -52,11 +53,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard/allSellers',
-                element: <AllSeller />
+                element: <AdminRoute><AllSeller /></AdminRoute>
             },
             {
                 path: '/dashboard/allBuyers',
-                element: <AllBuyer />
+                element: <AdminRoute><AllBuyer /></AdminRoute>
             },
             {
                 path: '/dashboard/myorders/',

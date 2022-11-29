@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider/AuthProvider';
+import useAdmin from '../hook/useAdmin';
 import useBuyer from '../hook/useBuyer';
 import useSeller from '../hook/useSeller';
 import Footer from '../pages/shered/Footer/Footer';
@@ -9,6 +10,7 @@ const DashboardLayou = () => {
     const {user} = useContext(AuthContext);
     const [isBuyer] = useBuyer(user?.email);
     const [isSeller] = useSeller(user?.email);
+    const [isAdmin] = useAdmin(user?.email);
     console.log('isByer', isBuyer, 'isSeller', isSeller);
     
     return (
@@ -23,7 +25,7 @@ const DashboardLayou = () => {
                     <label className="drawer-overlay"></label> 
                     <ul className=" p-4 w-80 text-base-content">
                         {  
-                            // isAdmin &&
+                            isAdmin &&
                             <>
                                 <li className=''><Link to='/dashboard/allSellers' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>All Sellers</Link></li>
                                 <li className=''><Link to='/dashboard/allBuyers' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>All Buyers</Link></li>
