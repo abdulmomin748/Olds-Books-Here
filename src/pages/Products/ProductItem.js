@@ -11,13 +11,15 @@ const ProductItem = ({setSaveProduct, product}) => {
     //     const {name, isReport} = product;
     const handleReport = product => {
         const {name, isReport} = product;
+        const reportedPId = product._id;
+        delete product._id;
         if(isReport === false){
             fetch(`https://old-books-here-server.vercel.app/reportedItems`,{
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(product)
+            body: JSON.stringify({...product, reportedPId})
             })
             .then(res => res.json())
             .then(data => {

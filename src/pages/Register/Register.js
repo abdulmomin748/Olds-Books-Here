@@ -44,7 +44,7 @@ const Register = () => {
     }
     return (
         <div className='py-20'>
-            <div className="w-full max-w-[500px] mx-auto p-4 rounded-md shadow sm:p-8 bg-yellow-600  text-white">
+            <div className="w-full max-w-[500px] mx-auto p-4 rounded-md shadow sm:p-8 bg-yellow-800  text-white">
                 <h2 className="mb-3 text-3xl font-semibold text-center">Sign Up</h2>
                 <p className="text-lg text-center dark:text-gray-400">Already have an account?
                     <Link to='/login' rel="noopener noreferrer" className="focus:underline hover:underline"> Log in here</Link>

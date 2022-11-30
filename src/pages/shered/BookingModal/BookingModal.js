@@ -83,7 +83,7 @@ const BookingModal = ({product, setSaveProduct}) => {
                         <input type='text' name='phone' placeholder='Phone Number' className="input input-bordered w-full placeholder:!text-black" required/>
                         <input type='text' name='meetingLocation' placeholder='Meeting Location' className="input input-bordered w-full placeholder:!text-black" required/>
 
-                        <input type='submit' name='submit' placeholder='Submit' className="uppercase bg-yellow-800  input font-semibold hover:bg-yellow-600 text-white input-bordered w-full cursor-pointer" />
+                        <input type='submit' name='submit' placeholder='Submit' className="uppercase bg-yellow-800  input font-semibold hover:bg-yellow-800 text-white input-bordered w-full cursor-pointer" />
                     </form>
                 </div>
             </div>

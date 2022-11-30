@@ -20,15 +20,15 @@ const Reporte = () => {
         return <Loading />
     }
     const handleDelete = id => {
-        fetch(`https://old-books-here-server.vercel.app/reportedItems/${id}`,{
+        fetch(`https://old-books-here-server.vercel.app/deletereportedItems/${id}`,{
             method: 'DELETE'
         }) 
         .then(res => res.json())
         .then(data => {
-            if(data.deletedCount > 0){
-                toast.success(`Successfully delete`)
-                refetch();
-            }
+            // if(data.deletedCount > 0){
+            //     toast.success(`Successfully delete`)
+            //     refetch();
+            // }
         })
     }
     return (

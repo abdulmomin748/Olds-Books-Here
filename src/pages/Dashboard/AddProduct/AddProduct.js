@@ -108,7 +108,7 @@ const AddProduct = () => {
     return (
         <div className='py-20'>
             <h2 className="mb-12 text-4xl font-semibold text-center">Add Product</h2>
-            <div className="w-full max-w-[550px] mx-auto p-4 rounded-md shadow sm:p-8 bg-yellow-600  text-white">
+            <div className="w-full max-w-[550px] mx-auto p-4 rounded-md shadow sm:p-8 bg-yellow-800  text-white">
                 <form onSubmit={handleAddProduct} className="space-y-8 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-4">
                         <div className="space-y-2">
