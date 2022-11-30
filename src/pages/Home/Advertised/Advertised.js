@@ -10,7 +10,7 @@ const Advertised = () => {
     const {data: advertiseProducts =[], isLoading, refetch} = useQuery({
         queryKey: ['advertises'],
         queryFn: async () => {
-            const res = await axios.get('https://old-books-here-server.vercel.app/advertises')
+            const res = await axios.get('http://localhost:5000/advertises')
             const data = await res.data;
             return data;
         }

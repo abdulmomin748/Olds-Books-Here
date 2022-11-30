@@ -9,7 +9,7 @@ const BookingModal = ({product, setSaveProduct}) => {
     console.log('here', product._id);
 
     useEffect(() => {
-        axios.get(`https://old-books-here-server.vercel.app/users?email=${user?.email}`)
+        axios.get(`http://localhost:5000/users?email=${user?.email}`)
         .then(res => {
             console.log(res.data.role);
             const buyer = res.data.role;
@@ -42,7 +42,7 @@ const BookingModal = ({product, setSaveProduct}) => {
         console.log(bookingData);
 
         if(isBuyer){
-            fetch('https://old-books-here-server.vercel.app/bookings', {
+            fetch('http://localhost:5000/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

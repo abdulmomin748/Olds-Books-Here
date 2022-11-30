@@ -12,14 +12,14 @@ const MyProducts = () => {
     const {data: userProducts =[], isLoading, refetch} = useQuery({
         queryKey: ['user?.email'],
         queryFn: async () => {
-            const res = await axios.get(`https://old-books-here-server.vercel.app/products?email=${user?.email}`)
+            const res = await axios.get(`http://localhost:5000/products?email=${user?.email}`)
             const data = await res.data;
             return data;
         }
     })  
     const enableAdvertised = product => {
         const {_id, name,} = product;
-        fetch(`https://old-books-here-server.vercel.app/advertises`,{
+        fetch(`http://localhost:5000/advertises`,{
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -36,7 +36,7 @@ const MyProducts = () => {
     }
     const deleteProduct = product => {
         const {_id, name,} = product;
-        fetch(`https://old-books-here-server.vercel.app/products/${_id}`,{
+        fetch(`http://localhost:5000/products/${_id}`,{
             method: 'DELETE'
         }) 
         .then(res => res.json())

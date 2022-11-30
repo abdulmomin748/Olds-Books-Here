@@ -10,7 +10,7 @@ const Reporte = () => {
     const {data: reportedItems = [], isLoading, refetch} = useQuery({
         queryKey: ['reportedItems'],
         queryFn: async () => {
-            const res = await axios.get(`https://old-books-here-server.vercel.app/reportedItems`)
+            const res = await axios.get(`http://localhost:5000/reportedItems`)
             const data = await res.data;
             return data;
         }
@@ -20,15 +20,15 @@ const Reporte = () => {
         return <Loading />
     }
     const handleDelete = id => {
-        fetch(`https://old-books-here-server.vercel.app/deletereportedItems/${id}`,{
+        fetch(`http://localhost:5000/deletereportedItems/${id}`,{
             method: 'DELETE'
         }) 
         .then(res => res.json())
         .then(data => {
-            // if(data.deletedCount > 0){
-            //     toast.success(`Successfully delete`)
-            //     refetch();
-            // }
+            if(data.deletedCount > 0){
+                toast.success(`Successfully delete`)
+                refetch();
+            }
         })
     }
     return (

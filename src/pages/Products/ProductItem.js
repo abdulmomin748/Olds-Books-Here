@@ -10,7 +10,9 @@ const ProductItem = ({setSaveProduct, product}) => {
     // const handleReport = product => {
     //     const {name, isReport} = product;
     const handleReport = product => {
+        console.log('object');
         const {name, isReport} = product;
+        console.log(isReport);
         const reportedPId = product._id;
         delete product._id;
         if(isReport === false){

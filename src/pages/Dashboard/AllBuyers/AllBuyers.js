@@ -12,7 +12,7 @@ const AllBuyer = () => {
     const {data: buyers = [], isLoading, refetch} = useQuery({
         queryKey: ['allBuyers'],
         queryFn: async () => {
-            const res = await axios.get('https://old-books-here-server.vercel.app/allBuyers')
+            const res = await axios.get('http://localhost:5000/allBuyers')
             const data = await res.data;
             return data;
         }
@@ -20,7 +20,7 @@ const AllBuyer = () => {
 
     const handleDelete = user => {
         const {name, _id} = user;
-        fetch(`https://old-books-here-server.vercel.app/users/${_id}`,{
+        fetch(`http://localhost:5000/users/${_id}`,{
             method: 'DELETE'
         }) 
         .then(res => res.json())

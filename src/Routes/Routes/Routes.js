@@ -42,7 +42,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                loader: ({params}) => fetch(`https://old-books-here-server.vercel.app/products/${params.id}`),
+                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`),
                 element: <PrivateRoute><Products /></PrivateRoute>,
             }
         ]
@@ -78,7 +78,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/payment/:id',
-                loader: ({params}) => fetch(`https://old-books-here-server.vercel.app/bookings/${params.id}`),
+                loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`),
                 element: <Payment/>
             }
         ]

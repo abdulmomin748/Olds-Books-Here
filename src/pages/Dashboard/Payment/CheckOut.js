@@ -16,14 +16,14 @@ import Loading from '../../shered/Loading/Loading';
 
         useEffect(() => {
             // Create PaymentIntent as soon as the page loads
-            fetch("https://old-books-here-server.vercel.app/create-payment-intent", {
+            fetch("http://localhost:5000/create-payment-intent", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({productPrice}),
             })
               .then((res) => res.json())
               .then((data) => setClientSecret(data.clientSecret));
-                // axios.post(`https://old-books-here-server.vercel.app/create-payment-intent`, {productPrice})
+                // axios.post(`http://localhost:5000/create-payment-intent`, {productPrice})
                 // .then(res => setClientSecret(res.clientSecret))
           }, [productPrice]);
 
@@ -70,7 +70,7 @@ import Loading from '../../shered/Loading/Loading';
                     bookingId: _id,
                     beforeBookingProductId
                 }
-                fetch('https://old-books-here-server.vercel.app/payments', {
+                fetch('http://localhost:5000/payments', {
                     method: 'POST', 
                     headers: {
                         'content-type': 'application/json',

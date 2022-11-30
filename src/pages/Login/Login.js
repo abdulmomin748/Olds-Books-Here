@@ -37,7 +37,7 @@ const Login = () => {
             photoUrl,
             role: "buyer"
         }
-        axios.post(`https://old-books-here-server.vercel.app/users?email=${user?.email}`, user)
+        axios.post(`http://localhost:5000/users?email=${user?.email}`, user)
         .then(res => console.log(res.data.message))
         .catch(err => console.log(err))
     }
@@ -67,7 +67,7 @@ const Login = () => {
                                 <label for="password" className="text-lg">Password</label>
                                 <Link rel="noopener noreferrer" href="#" className="text-xs hover:underline ">Forgot password?</Link>
                             </div>
-                            <input {...register("password", { required: 'Password is required' })} type="text" name="password" id="password" placeholder="*****" className="w-full px-3 text-black py-2 border rounded-md" />
+                            <input {...register("password", { required: 'Password is required' })} type="password" name="password" id="password" placeholder="*****" className="w-full px-3 text-black py-2 border rounded-md" />
                         </div>
                     </div>
                     <button type="submit" className="w-full bg-[#3f3c3c] hover:bg-slate-900 px-8 py-3 font-semibold rounded-md">Sign in</button>
