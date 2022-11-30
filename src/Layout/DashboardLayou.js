@@ -29,6 +29,7 @@ const DashboardLayou = () => {
                             <>
                                 <li className=''><Link to='/dashboard/allSellers' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>All Sellers</Link></li>
                                 <li className=''><Link to='/dashboard/allBuyers' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>All Buyers</Link></li>
+                                <li className=''><Link to='/dashboard/reportedItems' className='block border-b-2 transition-all p-5 font-semibold text-lg hover:text-[#cea906]'>Reported Items</Link></li>
 
                             </>
                         }

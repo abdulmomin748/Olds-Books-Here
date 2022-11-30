@@ -7,7 +7,7 @@ const Categorories = () => {
     const {data: categories, isLoading} = useQuery({
         queryKey: ['category'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/productsCategoris');
+            const res = await fetch('https://old-books-here-server.vercel.app/productsCategoris');
             const data = await res.json();
             return data;
         }

@@ -17,6 +17,7 @@ import Payment from "../../pages/Dashboard/Payment/Payment";
 import AllSeller from "../../pages/Dashboard/AllSellers/AllSellers";
 import AllBuyer from "../../pages/Dashboard/AllBuyers/AllBuyers";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import Reporte from "../../pages/Dashboard/Reporte/Reporte";
 const router = createBrowserRouter([
     {
         path: '/',
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`),
+                loader: ({params}) => fetch(`https://old-books-here-server.vercel.app/products/${params.id}`),
                 element: <PrivateRoute><Products /></PrivateRoute>,
             }
         ]
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
                 element: <AdminRoute><AllBuyer /></AdminRoute>
             },
             {
+                path: '/dashboard/reportedItems',
+                element: <AdminRoute><Reporte /></AdminRoute>
+            },
+            {
                 path: '/dashboard/myorders/',
                 element: <BuyerRoute><MyOders /></BuyerRoute>
             },
@@ -73,7 +78,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/payment/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`),
+                loader: ({params}) => fetch(`https://old-books-here-server.vercel.app/bookings/${params.id}`),
                 element: <Payment/>
             }
         ]

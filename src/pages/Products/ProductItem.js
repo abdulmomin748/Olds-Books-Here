@@ -1,10 +1,50 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import icon from '../../assets/icons8-approval-24.png'
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import useBuyer from '../../hook/useBuyer';
 const ProductItem = ({setSaveProduct, product}) => {
+    const {user} = useContext(AuthContext);
+    const [isBuyer] = useBuyer(user?.email);
+    console.log('productItem', isBuyer);
+    // const handleReport = product => {
+    //     const {name, isReport} = product;
+    const handleReport = product => {
+        const {name, isReport} = product;
+        if(isReport === false){
+            fetch(`https://old-books-here-server.vercel.app/reportedItems`,{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(product)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if(data.insertedId){
+                    toast.success(`Successfully reported ${name} product$`);
+                }
+            })
+        }
+    }
     return (
         <div>
            <div className='card custom_card max-w-md m-auto bg-base-100 shadow-xl'>
-                <figure><img className='w-[420px] h-[250px]' src={product.image} alt="Shoes" /></figure>
+                <figure className='relative'>
+                    {   
+                        isBuyer ? 
+                        <button onClick={() => handleReport(product)} className='btn-sm right-4 top-4 z-10 absolute cursor-pointer font-semibold text-[15px] bg-yellow-800 text-white rounded-md'>
+                        Report
+                        </button>
+                        : 
+                        <button onClick={() => handleReport(product)} disabled className='btn-sm right-4 top-4 z-10 absolute font-semibold text-[15px] bg-yellow-800 text-white rounded-md'>
+                        Report
+                        </button>
+                    }
+                    
+                    <img className='w-[420px] h-[250px]' src={product.image} alt="Shoes" />
+                </figure>
                 <div className="card-body p-4">
                     <h2 className="card-title text-[28px]">{product.name}</h2>
                     <p className='text-xl'>Location: <span className='font-medium border-b-2'>{product.location}</span></p>

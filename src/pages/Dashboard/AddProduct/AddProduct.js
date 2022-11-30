@@ -18,7 +18,7 @@ const AddProduct = () => {
     const [addproduct, setAddProduct] = useState('')
     const [productId, setProductId] = useState('637f455c345d495b77927d28')
     useEffect(() => {   
-        axios.get('http://localhost:5000/productsCategoris')
+        axios.get('https://old-books-here-server.vercel.app/productsCategoris')
         .then(data => {
             const cat = data.data;
             setCategories(cat)
@@ -73,9 +73,10 @@ const AddProduct = () => {
                     postedTime,
                     verified: false,
                     isPaid: false,
+                    isReport: false,   
                 }
                 console.log(image);
-                axios.post('http://localhost:5000/products', addProductInfo)
+                axios.post('https://old-books-here-server.vercel.app/products', addProductInfo)
                 .then(res => {
                    if(res.data.acknowledged){
                         form.reset();

@@ -14,7 +14,7 @@
 * Tailwind
 * Mongodb
 * Some React Frameworks like as(react router dom, react tailwind, react toast) 
-* Some Tailwind Frameworks like as(daisy ui, mamabaUi, flobite)
+* Some Tailwind Frameworks like as(daisy ui, mamabaUi, flowbite)
 * Node js framework like as(express)
 
 

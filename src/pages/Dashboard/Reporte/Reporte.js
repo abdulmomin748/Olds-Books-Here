@@ -1,48 +1,38 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import Loading from '../../shered/Loading/Loading';
 
-const AllBuyer = () => {
-    const {user} = useContext(AuthContext);
-    console.log(user);
-    const {data: buyers = [], isLoading, refetch} = useQuery({
-        queryKey: ['allBuyers'],
+const Reporte = () => {
+    const {user} = useContext(AuthContext)
+    const {data: reportedItems = [], isLoading, refetch} = useQuery({
+        queryKey: ['reportedItems'],
         queryFn: async () => {
-            const res = await axios.get('https://old-books-here-server.vercel.app/allBuyers')
+            const res = await axios.get(`https://old-books-here-server.vercel.app/reportedItems`)
             const data = await res.data;
             return data;
         }
     });
-
-    const handleDelete = user => {
-        const {name, _id} = user;
-        fetch(`https://old-books-here-server.vercel.app/users/${_id}`,{
+    console.log(reportedItems);
+    if(isLoading){
+        return <Loading />
+    }
+    const handleDelete = id => {
+        fetch(`https://old-books-here-server.vercel.app/reportedItems/${id}`,{
             method: 'DELETE'
         }) 
         .then(res => res.json())
         .then(data => {
             if(data.deletedCount > 0){
-                toast.success(`Successfully delete User ${name}`)
+                toast.success(`Successfully delete`)
                 refetch();
             }
         })
     }
-    if(isLoading){
-        return <Loading />
-    }
-    
-    console.log('seller', buyers);
     return (
-        <div>
-        {
-           buyers?.length === 0 ?  <div className='min-h-[60vh] flex justify-center items-center font-medium'>
-                <h2 className='text-3xl font-medium'>Buyers Not Found.</h2>
-            </div>
-            :
+        <>
             <div class="overflow-x-auto relative">
                 <table class="w-full text-[16px] text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-[16px] text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -60,15 +50,15 @@ const AllBuyer = () => {
                     </thead>
                     <tbody>
                         {
-                            buyers?.map(buyer => <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            reportedItems?.map(reportItem => <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <td class="py-4 px-6">
-                                    {buyer.name}
+                                    {reportItem.sellerName}
                                 </td>
                                 <td class="py-4 px-6">
-                                    {buyer.email}
+                                    {reportItem.email}
                                 </td>
                                 <td class="py-4 px-6">
-                                    <button onClick={() => handleDelete(buyer)} className='btn-sm font-semibold text-[15px] bg-yellow-800 text-white rounded-md'>
+                                    <button onClick={() => handleDelete(reportItem._id)} className='btn-sm font-semibold text-[15px] bg-yellow-800 text-white rounded-md'>
                                         Delete
                                     </button>
                                 </td>
@@ -76,10 +66,9 @@ const AllBuyer = () => {
                         }
                     </tbody>
                 </table>
-            </div> 
-        }
-        </div>
+            </div>
+        </>
     );
 };
 
-export default AllBuyer;
+export default Reporte;

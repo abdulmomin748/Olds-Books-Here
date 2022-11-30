@@ -38,7 +38,7 @@ const Register = () => {
             photoUrl,
             isVerified: false
         }
-        axios.post(`http://localhost:5000/users?email=${user?.email}`, user)
+        axios.post(`https://old-books-here-server.vercel.app/users?email=${user?.email}`, user)
         .then(res => console.log(res.data.message))
         .catch(err => console.log(err))
     }
