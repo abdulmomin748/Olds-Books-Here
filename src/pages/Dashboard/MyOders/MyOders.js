@@ -56,7 +56,7 @@ const MyOders = () => {
                                     {
                                         order.productPrice && !order.paid && <>
                                             <Link to={`/dashboard/payment/${order._id}`}>
-                                                <button className='btn-sm font-semibold text-[15px] bg-yellow-500 text-white rounded-md'>
+                                                <button className='btn-sm font-semibold text-[15px] bg-yellow-800 text-white rounded-md'>
                                                     Pay
                                                 </button>
                                             </Link>

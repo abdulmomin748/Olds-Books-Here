@@ -98,7 +98,7 @@ const MyProducts = () => {
                                         {product.rPrice}
                                     </td>
                                     <td class="py-4 px-6">
-                                        <span className='btn-sm text-[15px] bg-yellow-500 text-white rounded-md'>{
+                                        <span className='btn-sm text-[15px] bg-yellow-800 text-white rounded-md'>{
                                             product.isPaid ?  'Sold' : 'Available '
                                         }
                                         </span>
@@ -106,18 +106,18 @@ const MyProducts = () => {
                                     <td class="py-4 px-6">
                                         
                                             {
-                                                (product.isPaid || product.advertised) && <button  className='btn-sm cursor-not-allowed text-[15px] bg-yellow-500 text-white rounded-md'>
+                                                (product.isPaid || product.advertised) && <button  className='btn-sm cursor-not-allowed text-[15px] bg-yellow-800 text-white rounded-md'>
                                                     Advertised
                                                 </button>
                                             }
                                             {
-                                                !product.isPaid && !product.advertised && <button onClick={() => enableAdvertised(product)} className='btn-sm text-[15px] bg-yellow-500 text-white rounded-md'>
+                                                !product.isPaid && !product.advertised && <button onClick={() => enableAdvertised(product)} className='btn-sm text-[15px] bg-yellow-800 text-white rounded-md'>
                                                     Enable advertise
                                                 </button>
                                             }
                                     </td>
                                     <td class="py-4 px-6">
-                                        <button onClick={() => deleteProduct(product)} className='btn-sm text-[15px] bg-yellow-500 text-white rounded-md'>Delete</button>
+                                        <button onClick={() => deleteProduct(product)} className='btn-sm text-[15px] bg-yellow-800 text-white rounded-md'>Delete</button>
                                     </td>
                                 </tr>)
                             }

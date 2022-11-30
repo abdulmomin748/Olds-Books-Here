@@ -68,7 +68,7 @@ const AllBuyer = () => {
                                     {buyer.email}
                                 </td>
                                 <td class="py-4 px-6">
-                                    <button onClick={() => handleDelete(buyer)} className='btn-sm font-semibold text-[15px] bg-yellow-500 text-white rounded-md'>
+                                    <button onClick={() => handleDelete(buyer)} className='btn-sm font-semibold text-[15px] bg-yellow-800 text-white rounded-md'>
                                         Delete
                                     </button>
                                 </td>

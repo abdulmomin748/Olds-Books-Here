@@ -13,7 +13,7 @@ const Payment = () => {
             <div className='p-12 '>
                 <h6 className='font-semibold text-xl'>Hellow, {productBooking.name}</h6>
                 <p>Please pay <strong>{productBooking.productPrice}</strong> for your product<strong> {productBooking.productName}</strong></p>
-                <div className='max-w-md mt-12'>
+                <div className='max-w-md mt-12 border p-4'>
                     <Elements stripe={stripePromise}>
                         <CheckOut productBooking={productBooking} />
                     </Elements>

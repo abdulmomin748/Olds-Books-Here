@@ -21,7 +21,7 @@ const DashboardLayou = () => {
                 <div className="drawer-content"> {/*right part      ---- layout changeble*/}
                     <Outlet />
                 </div> 
-                <div className="drawer-side bg-slate-100"> {/*left part*/}
+                <div className="drawer-side bg-gray-100"> {/*left part*/}
                     <label className="drawer-overlay"></label> 
                     <ul className=" p-4 w-80 text-base-content">
                         {  

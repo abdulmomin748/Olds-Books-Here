@@ -14,7 +14,7 @@ const Navbar = () => {
     }
     const menuItems = <>
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/about'>Blog</Link></li>
+        <li><Link to='/blog'>Blog</Link></li>
         {user?.uid ? <>
             <li><Link to='/dashboard'>Dashboard</Link></li>
             <li><button onClick={handleLogOut}>Sign Out</button></li>

@@ -19,20 +19,13 @@ const AllSeller = () => {
     });
 
     const handleVarify = users => {
-        const {name,} = users;
-        fetch(`http://localhost:5000/users`,{
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(users)
+        const {name,email, _id} = user;
+        fetch(`http://localhost:5000/users?email=${user?.email}`,{
+            method: 'PATCH',
         })
         .then(res => res.json())
         .then(data => {
-            if(data.acknowledged){
-                toast.success(`Successfully verify user ${name}`);
-                refetch();
-            }
+            alert('ok')
         })
     }
 
@@ -57,7 +50,7 @@ const AllSeller = () => {
         <div>
         {
            sellers?.length === 0 ?  <div className='min-h-[60vh] flex justify-center items-center font-medium'>
-                <h2 className='text-3xl font-medium'>Users Not Found.</h2>
+                <h2 className='text-3xl font-medium'>Sellers Not Found.</h2>
             </div>
             :
             <div class="overflow-x-auto relative">
@@ -89,18 +82,18 @@ const AllSeller = () => {
                                 </td>
                                 <td class="py-4 px-6">
                                     {
-                                        seller.isVerified && <button className='cursor-not-allowed btn-sm font-semibold text-[15px] bg-yellow-500 text-white rounded-md'>
+                                        seller.verified && <button className='cursor-not-allowed btn-sm font-semibold text-[15px] bg-yellow-800 text-white rounded-md'>
                                             Verified
                                         </button>
                                     }
                                     {
-                                        !seller.isVerified && <button onClick={() => handleVarify(seller)} className='btn-sm font-semibold text-[15px] bg-yellow-500 text-white rounded-md'>
+                                        !seller.verified && <button onClick={() => handleVarify(seller)} className='btn-sm font-semibold text-[15px] bg-yellow-800 text-white rounded-md'>
                                             Verify Now
                                         </button>
                                     }
                                 </td>
                                 <td class="py-4 px-6">
-                                    <button onClick={() => handleDelete(seller)} className='btn-sm font-semibold text-[15px] bg-yellow-500 text-white rounded-md'>
+                                    <button onClick={() => handleDelete(seller)} className='btn-sm font-semibold text-[15px] bg-yellow-800 text-white rounded-md'>
                                         Delete
                                     </button>
                                 </td>

@@ -96,7 +96,7 @@ import Loading from '../../shered/Loading/Loading';
                         base: {
                         fontSize: '16px',
                         color: '#424770',
-                        border: '1px solid red',
+                        border: '2px solid red',
                         '::placeholder': {
                             color: '#aab7c4',
                         },
@@ -107,7 +107,7 @@ import Loading from '../../shered/Loading/Loading';
                     },
                     }}
                 />
-                <button className='btn bg-primary' type="submit" disabled={!stripe || !clientSecret || loading}>
+                <button className='btn-sm mt-7 px-10 font-semibold text-[15px] bg-yellow-800 text-white rounded-md' type="submit" disabled={!stripe || !clientSecret || loading}>
                     Pay
                 </button>
                 </form>
